@@ -2,7 +2,7 @@
 import yt_dlp
 import os
 
-BOT_TOKEN = "PASTE_YOUR_BOT_TOKEN_HERE"
+BOT_TOKEN = "8304098491:AAFzuQnfAS3dy3bnjIh0IG8vP3bsNHChj5A"
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
@@ -38,3 +38,4 @@ async def download(message: types.Message):
 
 if __name__ == "__main__":
     executor.start_polling(dp)
+
