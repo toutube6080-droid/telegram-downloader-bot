@@ -1,6 +1,5 @@
-aiogram==2.25.1
+pyTelegramBotAPI==4.13.1
 yt-dlp
 requests
 python-dotenv
 flask
-aiohttp==3.8.6
