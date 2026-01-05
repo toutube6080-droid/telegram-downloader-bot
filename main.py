@@ -1,8 +1,23 @@
-﻿from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, executor, types
 import yt_dlp
 import os
+import threading
+from flask import Flask
 
-BOT_TOKEN = "8304098491:AAFzuQnfAS3dy3bnjIh0IG8vP3bsNHChj5A"
+# ===== KEEP RENDER ALIVE =====
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is alive"
+
+def run_web():
+    app.run(host="0.0.0.0", port=10000)
+
+threading.Thread(target=run_web).start()
+# ============================
+
+BOT_TOKEN = os.getenv("BOT_TOKEN") or "8304098491:AAFzuQnfAS3dy3bnjIh0IG8vP3bsNHChj5A"
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
@@ -33,9 +48,8 @@ async def download(message: types.Message):
 
         os.remove("video.mp4")
 
-    except Exception:
+    except Exception as e:
         await message.reply("❌ Failed. Send a valid public link.")
 
 if __name__ == "__main__":
-    executor.start_polling(dp)
-
+    executor.start_polling(dp, skip_updates=True)
