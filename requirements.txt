@@ -1,4 +1,4 @@
-pyTelegramBotAPI==4.13.1
+pyTelegramBotAPI
 yt-dlp
 requests
 python-dotenv
