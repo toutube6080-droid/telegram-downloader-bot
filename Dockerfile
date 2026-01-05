@@ -1,17 +1,12 @@
-# Use the exact Python version you want
 FROM python:3.10.12-slim
 
-# Set working directory inside the container
 WORKDIR /app
 
-# Copy requirements first (for caching)
-COPY requirements.txt .
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all other files (main.py etc.)
 COPY . .
 
-# Command to run your bot
 CMD ["python", "main.py"]
